@@ -1,7 +1,8 @@
 import React from 'react';
+import QuestionCardList from '../../components/Questions/QuestionCardList';
 
 function MainPage() {
-  return <div>MainPage</div>;
+  return <QuestionCardList />;
 }
 
 export default MainPage;
