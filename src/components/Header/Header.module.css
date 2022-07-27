@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgb(255, 255, 255);
+
+}
+.header{
+padding: 10px 10px;
+  height: 50px;
+  margin-bottom: 30px;
+}
+.logo
+{
+  height: 51px;
+  float: left;
+}
