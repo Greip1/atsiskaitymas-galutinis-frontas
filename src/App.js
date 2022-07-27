@@ -17,11 +17,8 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path={'/'}>
+        <Route exact path={'/main'}>
           <MainPage />
-        </Route>
-        <Route exact path={'/questions/:q_id/answer'}>
-          <AnswerPage />
         </Route>
         <Route path={'/register'}>
           <RegisterPage />
@@ -29,12 +26,17 @@ function App() {
         <Route path={'/login'}>
           <LoginPage />
         </Route>
+
         <ProtectedRoute path={'/addQ'}>
           <AddQuestionPage />
+          <Route path={'/questions/:q_id/answer'}>
+            <AnswerPage />
+          </Route>
         </ProtectedRoute>
         <ProtectedRoute path={'/questions/:q_id/answer/add'}>
           <AddAnswerPage />
         </ProtectedRoute>
+
         <Route path={'*'}>
           <NotLoggedPage />
         </Route>
