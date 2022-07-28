@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 
 import * as Yup from 'yup';
 import { useAuthCtx } from '../../store/authContext';
-import { useHistory } from 'react-router-dom';
 import { baseUrl, myFetch } from '../../helper/utils';
 
 const initValues = {
@@ -12,7 +11,7 @@ const initValues = {
   password: '',
 };
 function LoginForm(props) {
-  const { login } = useAuthCtx();
+  const { login, username } = useAuthCtx();
   const [error, setError] = useState('');
 
   const formik = useFormik({
@@ -29,12 +28,12 @@ function LoginForm(props) {
     onSubmit: async (values) => {
       setError('');
       const fetchResult = await myFetch(`${baseUrl}/login`, 'POST', values);
-
+      console.log('fetchResult', fetchResult);
       if (fetchResult.err) {
         setError(fetchResult.err);
         return;
       }
-      login(fetchResult.token);
+      login(fetchResult.token, fetchResult.username);
       props.onSuccessLogin();
     },
   });

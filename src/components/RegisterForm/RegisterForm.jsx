@@ -37,7 +37,6 @@ function RegisterForm() {
         password: values.password,
       };
       const fetchResult = await myFetch(`${baseUrl}/register`, 'POST', newReg);
-      console.log('fetchResult', fetchResult);
       if (fetchResult.changes === 1) {
         setRegistrationSuccess(true);
       }
@@ -47,7 +46,6 @@ function RegisterForm() {
     },
   });
 
-  //   ===========================================
   return (
     <>
       {registrationSuccess ? (

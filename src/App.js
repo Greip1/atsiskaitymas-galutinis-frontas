@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import AnswerPage from './pages/AnswerPage/AnswerPage';
 import AddQuestionPage from './pages/AddQuestionPage/AddQuestionPage';
 import AddAnswerPage from './pages/AddAnswerPage/AddAnswerPage';
+import PersonalPage from './pages/PersonalPage/PersonalPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
@@ -20,19 +21,27 @@ function App() {
         <Route exact path={'/main'}>
           <MainPage />
         </Route>
+
         <Route path={'/register'}>
           <RegisterPage />
         </Route>
+
         <Route path={'/login'}>
           <LoginPage />
         </Route>
 
+        <Route path={'/questions/:q_id/answer'}>
+          <AnswerPage />
+        </Route>
+
         <ProtectedRoute path={'/addQ'}>
           <AddQuestionPage />
-          <Route path={'/questions/:q_id/answer'}>
-            <AnswerPage />
-          </Route>
         </ProtectedRoute>
+
+        <ProtectedRoute path={'/personal'}>
+          <PersonalPage />
+        </ProtectedRoute>
+
         <ProtectedRoute path={'/questions/:q_id/answer/add'}>
           <AddAnswerPage />
         </ProtectedRoute>

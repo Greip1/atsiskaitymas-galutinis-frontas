@@ -12,17 +12,17 @@ import { baseUrl } from '../../helper/utils';
 function QuestionCardList() {
   const { token } = useAuthCtx();
   const [question, setQuestion] = useState([]);
+  const [answer, setAnswer] = useState([]);
 
-  const getPosts = async () => {
+  const getAllQuestions = async () => {
     const response = await fetch(`${baseUrl}/questions`);
     const data = await response.json();
     if (Array.isArray(data)) {
       setQuestion(data);
     }
   };
-
   useEffect(() => {
-    getPosts();
+    getAllQuestions();
   }, []);
 
   return (
@@ -35,7 +35,7 @@ function QuestionCardList() {
             <h2>There are no available questions...</h2>
             <br />
 
-            <h3 className={css.addText}>Want to join us and ask a question? </h3>
+            <h3 className={css.addText}>Join us and ask a question </h3>
             <h3>
               Login
               <Link className={css.link} to={'/login'}>
