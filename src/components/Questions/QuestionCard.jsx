@@ -29,6 +29,11 @@ function QuestionCard({ q_title, q_id, question, onClick }) {
 
   return (
     <>
+      {/* q.isEdited && 
+            <>
+              <p>Edited</p>
+              <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </> */}
       <div className={css.card}>
         {isUserLoggedIn && (
           <div className={css.iconContainer}>

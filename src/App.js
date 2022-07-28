@@ -12,6 +12,8 @@ import AddQuestionPage from './pages/AddQuestionPage/AddQuestionPage';
 import AddAnswerPage from './pages/AddAnswerPage/AddAnswerPage';
 import PersonalPage from './pages/PersonalPage/PersonalPage';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import MyAnswersPage from './pages/MyAnswersPage/MyAnswersPage';
+import MyQuestionsPage from './pages/MyQuestionsPage/MyQuestionsPage';
 
 function App() {
   return (
@@ -30,6 +32,10 @@ function App() {
           <LoginPage />
         </Route>
 
+        <ProtectedRoute path={'/questions/:q_id/answer/add'}>
+          <AddAnswerPage />
+        </ProtectedRoute>
+
         <Route path={'/questions/:q_id/answer'}>
           <AnswerPage />
         </Route>
@@ -38,12 +44,16 @@ function App() {
           <AddQuestionPage />
         </ProtectedRoute>
 
-        <ProtectedRoute path={'/personal'}>
-          <PersonalPage />
+        <ProtectedRoute path={'/personal/questions/:user_id'}>
+          <MyQuestionsPage />
         </ProtectedRoute>
 
-        <ProtectedRoute path={'/questions/:q_id/answer/add'}>
-          <AddAnswerPage />
+        <ProtectedRoute path={'/personal/answers/:user_id'}>
+          <MyAnswersPage />
+        </ProtectedRoute>
+
+        <ProtectedRoute path={'/personal'}>
+          <PersonalPage />
         </ProtectedRoute>
 
         <Route path={'*'}>

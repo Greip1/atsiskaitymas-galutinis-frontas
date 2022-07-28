@@ -8,7 +8,7 @@ function Header() {
   return (
     <header className={css.header}>
       <div className={css.img}>
-        <img className={css.logo} src="logo1.png" alt="Logo" />
+        <img className={css.logo} src="logo.png" alt="Logo" />
         <h3 className={css.text}>PETS TALK</h3>
       </div>
 

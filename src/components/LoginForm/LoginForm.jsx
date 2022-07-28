@@ -33,7 +33,7 @@ function LoginForm(props) {
         setError(fetchResult.err);
         return;
       }
-      login(fetchResult.token, fetchResult.username);
+      login(fetchResult.token, fetchResult.username, fetchResult.user_id);
       props.onSuccessLogin();
     },
   });

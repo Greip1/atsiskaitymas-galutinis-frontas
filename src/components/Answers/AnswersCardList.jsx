@@ -11,6 +11,7 @@ function AnswersCardList() {
 
   const { q_id } = useParams();
   console.log('q_id from params', q_id);
+  console.log(useParams());
 
   // =======
   const getQuestion = async () => {
