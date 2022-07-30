@@ -24,11 +24,26 @@ function QuestionCardList() {
   useEffect(() => {
     getAllQuestions();
   }, []);
-
+  function addLike(x) {
+    console.log('like');
+    return x + 1;
+  }
+  function minusLike(x) {
+    console.log('dislike');
+    const ats = x - 1;
+    return ats;
+  }
   return (
     <div className={css.cardList}>
       {question.length > 0 ? (
-        question.map((skObj) => <QuestionCard key={skObj.q_id} {...skObj} />)
+        question.map((skObj) => (
+          <QuestionCard
+            key={skObj.q_id}
+            minusLike={() => minusLike(skObj.q_likes)}
+            addLike={() => addLike(skObj.q_likes)}
+            {...skObj}
+          />
+        ))
       ) : (
         <>
           <div>

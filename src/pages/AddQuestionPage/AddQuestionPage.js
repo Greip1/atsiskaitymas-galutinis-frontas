@@ -1,7 +1,12 @@
 import React from 'react';
+import AddQuestion from '../../components/AddQuestion/AddQuestion';
 
 function AddQuestionPage() {
-  return <div>AddQuestionPage</div>;
+  return (
+    <div>
+      <AddQuestion />
+    </div>
+  );
 }
 
 export default AddQuestionPage;

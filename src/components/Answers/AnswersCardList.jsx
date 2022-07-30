@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
 import { useAuthCtx } from '../../store/authContext';
 import AnswersCard from './AnswersCard';
@@ -13,7 +13,6 @@ function AnswersCardList() {
   console.log('q_id from params', q_id);
   console.log(useParams());
 
-  // =======
   const getQuestion = async () => {
     const response = await fetch(`${baseUrl}/questions/${q_id}`);
     const data = await response.json();
@@ -42,16 +41,26 @@ function AnswersCardList() {
             <h3 className="question">{question[0].question}</h3>
           </>
         ) : (
-          <p>Please, go back to main page</p>
+          <p>Loading...</p>
         )}
       </div>
-      {isUserLoggedIn && answers.length > 0 && <p>prideti nauja atsakyma</p>}
+      {isUserLoggedIn && answers.length > 0 && (
+        <Link to={`/questions/${q_id}/answer/add`}>
+          {' '}
+          <p>prideti nauja atsakyma</p>
+        </Link>
+      )}
       <div>
         {answers.length === 1 ? `${answers.length} answer` : `${answers.length} answers`}
         {answers.length < 1 ? (
           <>
             <h3>There ar no answers to this question yet</h3>
-            {isUserLoggedIn && <p>prideti nauja atsakyma</p>}
+            {isUserLoggedIn && (
+              <Link to={`/questions/${q_id}/answer/add`}>
+                {' '}
+                <p>prideti nauja atsakyma</p>
+              </Link>
+            )}
           </>
         ) : (
           answers.map((ob) => <AnswersCard key={ob.a_id} {...ob} />)

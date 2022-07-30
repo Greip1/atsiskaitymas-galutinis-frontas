@@ -3,7 +3,7 @@ import AnswersCardList from '../../components/Answers/AnswersCardList';
 
 function AnswerPage() {
   return (
-    <div>
+    <div className="container">
       <AnswersCardList />
     </div>
   );

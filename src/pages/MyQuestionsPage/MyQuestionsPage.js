@@ -4,7 +4,6 @@ import MyQuestionsCardList from '../../components/MyQuestions/MyQuestionsCardLis
 function MyQuestionsPage() {
   return (
     <div>
-      <h2>All your questions below</h2>
       <MyQuestionsCardList />
     </div>
   );

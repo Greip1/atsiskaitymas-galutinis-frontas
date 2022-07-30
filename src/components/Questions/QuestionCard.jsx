@@ -6,9 +6,19 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function QuestionCard({ q_title, q_id, question, onClick }) {
+function QuestionCard({
+  q_title,
+  q_id,
+  question,
+  onClick,
+  q_dislikes,
+  q_likes,
+  addLike,
+  minusLike,
+}) {
   const { isUserLoggedIn, logout } = useAuthCtx();
   const [answers, setAnswers] = useState([]);
+  const [like, setLike] = useState([answers]);
   // =======
 
   const getAllAnswers = async () => {
@@ -18,14 +28,17 @@ function QuestionCard({ q_title, q_id, question, onClick }) {
       setAnswers(data);
     }
   };
+  // const getAllLikes = async () => {
+  //   const response = await fetch(`${baseUrl}/questions/${q_id}/answers`);
+  //   const data = await response.json();
+  //   if (Array.isArray(data)) {
+  //     setAnswers(data);
+  //   }
+  // };
   useEffect(() => {
     getAllAnswers();
   }, []);
   // =======
-  function clickHandler() {
-    console.log('this is id from clickHandler', q_id);
-    onClick !== undefined && onClick(q_id);
-  }
 
   return (
     <>
@@ -35,17 +48,18 @@ function QuestionCard({ q_title, q_id, question, onClick }) {
               <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
             </> */}
       <div className={css.card}>
-        {isUserLoggedIn && (
-          <div className={css.iconContainer}>
-            <i className="fa fa-thumbs-up" aria-hidden="true"></i>
-            <i className="fa fa-thumbs-down" aria-hidden="true"></i>
-          </div>
-        )}
+        <div className={css.likesContainer}>
+          {isUserLoggedIn && (
+            <div className={css.iconContainer}>
+              <i onClick={addLike} className="fa fa-thumbs-up" aria-hidden="true"></i>
+              <i onClick={minusLike} className="fa fa-thumbs-down" aria-hidden="true"></i>
+            </div>
+          )}{' '}
+          <p>votes: {q_likes}</p>
+        </div>
         <div>
           <Link to={`/questions/${q_id}/answer`}>
-            <h3 onClick={clickHandler} className={css.title}>
-              {q_title}
-            </h3>
+            <h3 className={css.title}>{q_title}</h3>
           </Link>
 
           <div className={css.line} />

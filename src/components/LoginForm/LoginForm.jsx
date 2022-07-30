@@ -36,6 +36,8 @@ function LoginForm(props) {
       login(fetchResult.token, fetchResult.username, fetchResult.user_id);
       props.onSuccessLogin();
     },
+
+    //  WTFFFFFFF SU LOGIN
   });
 
   return (
