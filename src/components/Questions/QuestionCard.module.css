@@ -53,3 +53,12 @@
           gap: 15px;
       } 
   } */
+
+  .filterContainer{
+    display: flex;
+    justify-content: space-between;
+
+  }
+  button{
+  margin-right: 10px;
+  }

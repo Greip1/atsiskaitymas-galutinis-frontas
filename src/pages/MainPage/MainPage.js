@@ -11,7 +11,7 @@ function MainPage() {
     <div>
       {isUserLoggedIn && (
         <div>
-          <h3>Du you want to ask a question? </h3>
+          <h3>Do you want to ask a question? </h3>
           <h3>
             <Link className={css.link} to={'/addQ'}>
               Do it HERE

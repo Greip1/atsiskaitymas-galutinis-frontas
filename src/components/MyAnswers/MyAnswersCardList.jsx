@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
@@ -22,6 +23,8 @@ function MyAnswersCardList() {
     return;
   };
   async function deleteFetch(a_id) {
+    if (confirm('Ar tikrai norite istrinti?') === false) return;
+
     const response = await fetch(`${baseUrl}/answers/${a_id}`, {
       method: 'DELETE',
       headers: {
@@ -41,13 +44,52 @@ function MyAnswersCardList() {
   useEffect(() => {
     getAllAnswers();
   }, []);
+  //
+  async function handleUpdate(a_id, updatedAnswer) {
+    // console.log('handleUpdateTodo called in TodoApp', a_id, updatedAnswer);
 
+    const upd = answers.map((tObj) => {
+      if (tObj.a_id === a_id) {
+        console.log('updatedAnswer', updatedAnswer);
+
+        return { ...tObj, answer: updatedAnswer };
+      }
+      return { ...tObj };
+    });
+    // console.log('updatedAnswer', updatedAnswer);
+    setAnswers(upd);
+    const newOBj = {
+      answer: updatedAnswer,
+    };
+    console.log('upd', upd);
+    console.log('newOBj', newOBj);
+    fetchEditedQ(a_id, newOBj);
+  }
+  //
+  async function fetchEditedQ(a_id, updatedAnswer) {
+    const response = await fetch(`${baseUrl}/answers/${a_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updatedAnswer),
+    });
+    console.log('response', response);
+    const data = await response.json();
+    console.log('data', data);
+    if (Array.isArray(data)) {
+      setAnswers(data);
+    }
+  }
+
+  //
   return (
     <>
       {postCreated ? (
         <>
           <div className={css.successMessage}>
-            <p>Question was successfully deleted</p>
+            <p>Answer was successfully deleted</p>
             <Link className={css.navLink} to={`/personal/`}>
               <button className={css.btn}>Back to your personal page</button>
             </Link>
@@ -59,15 +101,20 @@ function MyAnswersCardList() {
       ) : (
         <div>
           <h2>
-            All your questions below
+            All your Answers below
             <p>({answers.length})</p>
           </h2>
           {answers.length > 0 ? (
             answers.map((q) => (
-              <MyAnswersCard key={q.a_id} onDelete={deleteFetch} {...q} />
+              <MyAnswersCard
+                key={q.a_id}
+                onEdit={handleUpdate}
+                onDelete={deleteFetch}
+                {...q}
+              />
             ))
           ) : (
-            <p>There ar no answers yet</p>
+            <p>There are no answers yet</p>
           )}
         </div>
       )}

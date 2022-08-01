@@ -3,7 +3,7 @@ import { useAuthCtx } from '../../store/authContext';
 import css from './Header.module.css';
 
 function Header() {
-  const { isUserLoggedIn, logout, token } = useAuthCtx();
+  const { isUserLoggedIn, logout } = useAuthCtx();
 
   return (
     <header className={css.header}>

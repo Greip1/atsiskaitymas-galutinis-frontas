@@ -11,22 +11,6 @@ function AnswersCard({ q_id, onClick, answer }) {
   const [answers, setAnswers] = useState([]);
   // =======
 
-  //   const getAllAnswers = async () => {
-  //     const response = await fetch(`${baseUrl}/questions/${q_id}/answers`);
-  //     const data = await response.json();
-  //     if (Array.isArray(data)) {
-  //       setAnswers(data);
-  //     }
-  //   };
-  //   useEffect(() => {
-  //     getAllAnswers();
-  //   }, []);
-  // =======
-  //   function clickHandler() {
-  //     console.log('this is id from clickHandler', q_id);
-  //     onClick !== undefined && onClick(q_id);
-  //   }
-
   return (
     <div className="answers-container">
       {isUserLoggedIn && (

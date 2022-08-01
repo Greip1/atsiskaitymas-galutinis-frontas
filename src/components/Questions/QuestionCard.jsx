@@ -15,19 +15,13 @@ function QuestionCard({
   q_likes,
   addLike,
   minusLike,
+  q_timestamp,
+  answersNr,
 }) {
   const { isUserLoggedIn, logout } = useAuthCtx();
-  const [answers, setAnswers] = useState([]);
-  const [like, setLike] = useState([answers]);
+  // const [like, setLike] = useState([answers]);
   // =======
 
-  const getAllAnswers = async () => {
-    const response = await fetch(`${baseUrl}/questions/${q_id}/answers`);
-    const data = await response.json();
-    if (Array.isArray(data)) {
-      setAnswers(data);
-    }
-  };
   // const getAllLikes = async () => {
   //   const response = await fetch(`${baseUrl}/questions/${q_id}/answers`);
   //   const data = await response.json();
@@ -35,11 +29,15 @@ function QuestionCard({
   //     setAnswers(data);
   //   }
   // };
-  useEffect(() => {
-    getAllAnswers();
-  }, []);
-  // =======
 
+  const dataNormal = new Date({ q_timestamp }).toLocaleString();
+  //
+  // SORTINGGGGGGG
+
+  // useEffect(() => {
+  // }, []);
+  // =======
+  // console.log('answers', answers);
   return (
     <>
       {/* q.isEdited && 
@@ -56,6 +54,7 @@ function QuestionCard({
             </div>
           )}{' '}
           <p>votes: {q_likes}</p>
+          <p>answers: {answersNr}</p>
         </div>
         <div>
           <Link to={`/questions/${q_id}/answer`}>
@@ -64,6 +63,9 @@ function QuestionCard({
 
           <div className={css.line} />
           <p className={css.description}>{question}</p>
+        </div>
+        <div className={css.dataContainer}>
+          <p>{new Date(q_timestamp).toLocaleString()}</p>
         </div>
       </div>
     </>

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
@@ -7,6 +8,10 @@ import css from './MyQuestion.module.css';
 
 function MyQuestionsCardList() {
   const { token } = useAuthCtx();
+  if (!token) {
+    alert('Session time is over.Please login');
+    window.location.replace('/login');
+  }
 
   const [question, setQuestion] = useState([]);
   const [error, setError] = useState(false);
@@ -24,10 +29,8 @@ function MyQuestionsCardList() {
     getAllAnswers();
   }, []);
 
-  console.log('question', question);
-
   async function handleUpdate(q_id, updatedQuestion) {
-    console.log('handleUpdateTodo called in TodoApp', q_id, updatedQuestion);
+    // console.log('handleUpdateTodo called in TodoApp', q_id, updatedQuestion);
 
     const upd = question.map((tObj) => {
       if (tObj.q_id === q_id) {
@@ -37,9 +40,14 @@ function MyQuestionsCardList() {
       }
       return { ...tObj };
     });
+    // console.log('updatedQuestion', updatedQuestion);
     setQuestion(upd);
+    const newOBj = {
+      question: updatedQuestion,
+    };
     console.log('upd', upd);
-    fetchEditedQ(q_id, updatedQuestion);
+    console.log('newOBj', newOBj);
+    fetchEditedQ(q_id, newOBj);
   }
   //
   async function fetchEditedQ(q_id, updatedQuestion) {
@@ -59,6 +67,8 @@ function MyQuestionsCardList() {
     }
   }
   async function deleteFetch(q_id) {
+    if (confirm('Ar tikrai norite istrinti?') === false) return;
+
     const response = await fetch(`${baseUrl}/questions/${q_id}`, {
       method: 'DELETE',
       headers: {
@@ -102,13 +112,12 @@ function MyQuestionsCardList() {
               <MyQuestionsCard
                 key={qOb.q_id}
                 onEdit={handleUpdate}
-                // fetchEditedQ={fetchEditedQ}
                 {...qOb}
                 onDelete={deleteFetch}
               />
             ))
           ) : (
-            <p>There ar no questions yet</p>
+            <p>There are no questions yet</p>
           )}
         </div>
       )}
