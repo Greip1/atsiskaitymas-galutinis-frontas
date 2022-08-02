@@ -7,23 +7,34 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import css from './Answers.module.css';
 
-function AnswersCard({ q_id, onClick, answer }) {
+function AnswersCard({ a_timestamp, answer, isEditedA }) {
   const { isUserLoggedIn, logout } = useAuthCtx();
   const [answers, setAnswers] = useState([]);
   // =======
 
   return (
-    <div className="answers-container">
-      {isUserLoggedIn && (
-        <>
-          <div className="icons">
-            <i className="fa fa-thumbs-up" aria-hidden="true"></i>
-            <i className="fa fa-thumbs-down" aria-hidden="true"></i>
-          </div>
-        </>
-      )}
-      <div className="answer">
-        <p>{answer}</p>
+    <div className={css.answersCard}>
+      <div className={css.likeContainer}>
+        {isUserLoggedIn && (
+          <>
+            <div className="icons">
+              <i className="fa fa-thumbs-up" aria-hidden="true"></i>
+              <i className="fa fa-thumbs-down" aria-hidden="true"></i>
+            </div>
+          </>
+        )}
+        <p>votes</p>
+      </div>
+
+      <div className={css.answerContainer}>
+        <p className={css.answer}>{answer}</p>
+      </div>
+
+      <div className={css.timeCont}>
+        <p className={css.editedA}>
+          {isEditedA ? <i className="fa fa-pencil-square-o" aria-hidden="true"></i> : ''}
+        </p>
+        <p className={css.time}>{new Date(a_timestamp).toLocaleString()}</p>
       </div>
     </div>
   );

@@ -68,7 +68,6 @@ function App() {
           <NotLoggedPage />
         </Route>
       </Switch>
-      <Footer />
     </div>
   );
 }

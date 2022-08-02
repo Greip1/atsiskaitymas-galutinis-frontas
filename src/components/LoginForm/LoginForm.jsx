@@ -44,7 +44,7 @@ function LoginForm(props) {
     <div className="formContainer">
       <form className={css.form} onSubmit={formik.handleSubmit}>
         <h1 className={css.title}>Please Login</h1>
-        <p className={css.errorMsg}>{error ? error : ''}</p>
+        <p className={`${css.errorMsg} ${css.emailErr}`}>{error ? error : ''}</p>
 
         <label className={css.label}>Email </label>
         <br />

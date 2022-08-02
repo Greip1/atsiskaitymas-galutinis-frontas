@@ -10,7 +10,6 @@ function QuestionCard({
   q_title,
   q_id,
   question,
-
   q_likes,
   addLike,
   minusLike,
@@ -35,7 +34,7 @@ function QuestionCard({
           <p>votes: {q_likes}</p>
           <p>answers: {answersNr}</p>
         </div>
-        <div>
+        <div className={css.questionContainer}>
           <Link to={`/questions/${q_id}/answer`}>
             <h3 className={css.title}>{q_title}</h3>
           </Link>

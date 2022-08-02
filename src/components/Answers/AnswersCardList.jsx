@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
 import { useAuthCtx } from '../../store/authContext';
 import AnswersCard from './AnswersCard';
+import css from './Answers.module.css';
 
 function AnswersCardList() {
   const { isUserLoggedIn, logout } = useAuthCtx();
@@ -33,35 +34,50 @@ function AnswersCardList() {
     getAllAnswers();
   }, []);
   return (
-    <div>
-      <div className="questionContainer">
+    <div className={css.container}>
+      <div className={css.buttonContainer}>
+        {isUserLoggedIn && (
+          <Link to={`/questions/${q_id}/answer/add`}>
+            {' '}
+            <button>Add new answer</button>
+          </Link>
+        )}
+        <Link to={`/main`}>
+          {' '}
+          <button>Go back</button>
+        </Link>
+      </div>
+
+      <div className={css.questionContainer}>
         {question.length > 0 ? (
-          <>
-            <h2 className="questionTitle">{question[0].q_title}</h2>
-            <h3 className="question">{question[0].question}</h3>
-          </>
+          <div className={css.quesContainer}>
+            <h2 className={css.questionTitle}>{question[0].q_title}</h2>
+            <h3 className={css.question}>{question[0].question}</h3>
+          </div>
         ) : (
           <p>Loading...</p>
         )}
       </div>
-      {isUserLoggedIn && answers.length > 0 && (
-        <Link to={`/questions/${q_id}/answer/add`}>
+
+      <div className={css.answersContainer}>
+        <p className={css.answerNumber}>
           {' '}
-          <p>prideti nauja atsakyma</p>
-        </Link>
-      )}
-      <div>
-        {answers.length === 1 ? `${answers.length} answer` : `${answers.length} answers`}
+          {answers.length === 1
+            ? `${answers.length} answer`
+            : `${answers.length} answers`}
+        </p>
         {answers.length < 1 ? (
-          <>
+          <div className={css.noQuestions}>
             <h3>There ar no answers to this question yet</h3>
             {isUserLoggedIn && (
               <Link to={`/questions/${q_id}/answer/add`}>
                 {' '}
-                <p>prideti nauja atsakyma</p>
+                <p>
+                  Be the first to <strong>answer</strong> this question
+                </p>
               </Link>
             )}
-          </>
+          </div>
         ) : (
           answers.map((ob) => <AnswersCard key={ob.a_id} {...ob} />)
         )}

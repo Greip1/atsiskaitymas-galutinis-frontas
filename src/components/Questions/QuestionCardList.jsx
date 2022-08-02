@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
 
 function QuestionCardList() {
-  const { token } = useAuthCtx();
+  const { token, isUserLoggedIn } = useAuthCtx();
   const [question, setQuestion] = useState([]);
   const [answers, setAnswers] = useState([]);
 
@@ -131,22 +131,32 @@ function QuestionCardList() {
   return (
     <div className={css.container}>
       <div className={css.filterContainer}>
+        {/*  */}
         <div className={css.answersContainer}>
-          <p>Filtruoti klausimus:</p>
+          <p className={css.sort}>Filter By:</p>
           <button onClick={showAnswered} className={css.sortBtn}>
-            Atsakyti
+            Answered
           </button>
-          <button onClick={showNOTAnswered}>Neatsakyti</button>
-          <button onClick={getAllQuestions}>Visi</button>
+          <button onClick={showNOTAnswered}>Not answered</button>
+          <button onClick={getAllQuestions}>All</button>
         </div>
+        {/*  */}
         <div className={css.sortByContainer}>
-          <p>Sort By:</p>
-          <button onClick={sortByAnswers}>Answers</button>
+          <p className={css.sort}>Sort By:</p>
+          {/* <button onClick={sortByAnswers}>Answers</button> */}
           <button onClick={sortByDate}>Date</button>
           <button onClick={sortByLikes}>Likes </button>
         </div>
+        {/*  */}
       </div>
-
+      {!isUserLoggedIn && (
+        <p>
+          If you want to ask a question, please{' '}
+          <Link className={css.link} to={'/login'}>
+            Login
+          </Link>
+        </p>
+      )}
       <div className={css.cardList}>
         {question.length > 0 ? (
           question.map((skObj) => (
@@ -166,9 +176,8 @@ function QuestionCardList() {
 
               <h3 className={css.addText}>Join us and ask a question </h3>
               <h3>
-                Login
-                <Link className={css.link} to={'/login'}>
-                  HERE
+                <Link className={css.link} to={'/addQ'}>
+                  {''} HERE
                 </Link>
               </h3>
             </div>

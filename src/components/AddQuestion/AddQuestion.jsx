@@ -66,48 +66,57 @@ function AddQuestion() {
           </div>
         </>
       ) : (
-        <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="q_title">Question Title</label>
-          <br />
-          <input
-            type="text"
-            name="q_title"
-            id="q_title"
-            className={
-              formik.touched.q_title && formik.errors.q_title ? css.errorInput : css.input
-            }
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.q_title}
-            placeholder="Title..."
-          />
-          <br />
-          <p className={css.errorMsg}>{formik.errors.q_title}</p>
-          <br />
-
-          <label htmlFor="question">Your question</label>
-          <br />
-          <textarea
-            className={
-              formik.touched.question && formik.errors.question
-                ? css.errorInput
-                : css.input
-            }
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.question}
-            name="question"
-            id="question"
-            cols="30"
-            rows="10"
-            placeholder="Your question..."
-          ></textarea>
-          <br />
-          <p className={css.errorMsg}>{formik.errors.question}</p>
-
-          <br />
-          <button type="submit">Submit</button>
-        </form>
+        <div className="formContainer">
+          <form onSubmit={formik.handleSubmit}>
+            <label className={css.questionTitle} htmlFor="q_title">
+              Question Title
+            </label>
+            <br />
+            <input
+              type="text"
+              name="q_title"
+              id="q_title"
+              className={
+                formik.touched.q_title && formik.errors.q_title
+                  ? css.errorInput
+                  : css.input
+              }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.q_title}
+              placeholder="Title..."
+            />
+            <br />
+            <p className={css.errorMsg}>{formik.errors.q_title}</p>
+            <br />
+            <label htmlFor="question">Your question</label>
+            <br />
+            <textarea
+              className={
+                formik.touched.question && formik.errors.question
+                  ? css.errorInput
+                  : css.input
+              }
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.question}
+              name="question"
+              id="question"
+              cols="30"
+              rows="10"
+              placeholder="Your question..."
+            ></textarea>
+            <br />
+            <p className={css.errorMsg}>{formik.errors.question}</p>
+            <br />
+            <div className={css.buttonCont}>
+              <button type="submit">Submit</button>
+              <Link className={css.navLink} to={`/main`}>
+                <button className={css.btn}>Go back</button>
+              </Link>
+            </div>{' '}
+          </form>{' '}
+        </div>
       )}
     </>
   );

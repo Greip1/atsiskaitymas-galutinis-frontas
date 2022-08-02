@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
 import { useAuthCtx } from '../../store/authContext';
@@ -16,9 +16,21 @@ function AddAnswer() {
 
   const [error, setError] = useState(false);
   const [postCreated, setPostCreated] = useState(false);
+  const [question, setQuestion] = useState([]);
+
   const { q_id } = useParams();
   const { user_id, token } = useAuthCtx();
 
+  const getQuestion = async () => {
+    const response = await fetch(`${baseUrl}/questions/${q_id}`);
+    const data = await response.json();
+    if (Array.isArray(data)) {
+      setQuestion(data);
+    }
+  };
+  useEffect(() => {
+    getQuestion();
+  }, []);
   // ////////////////////
   const formik = useFormik({
     initialValues: initValues,
@@ -55,7 +67,7 @@ function AddAnswer() {
       {postCreated ? (
         <>
           <div className={css.successMessage}>
-            <p>Post was successfully added!</p>
+            <p>Answer was successfully added!</p>
             <Link className={css.navLink} to={`/questions/${q_id}/answer`}>
               <button className={css.btn}>Back to all answers</button>
             </Link>
@@ -63,30 +75,44 @@ function AddAnswer() {
         </>
       ) : (
         // <form onSubmit={addNewAnswer}>
-        <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="answer">Your answer</label>
-          <br />
-          <textarea
-            className={
-              formik.touched.answer && formik.errors.answer ? css.errorInput : css.input
-            }
-            // onChange={answerHandler}
-            // value={answerValue}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.answer}
-            name="answer"
-            id="answer"
-            cols="30"
-            rows="10"
-            placeholder="Your answer..."
-          ></textarea>
-          <br />
-          <p className={css.errorMsg}>{formik.errors.answer}</p>
+        <div className="formContainer " id="addAnswer">
+          {question.length > 0 ? (
+            <div className={css.quesContainer}>
+              <h2 className={css.questionTitle}>{question[0].q_title}</h2>
+              <h3 className={css.question}>{question[0].question}</h3>
+            </div>
+          ) : (
+            <p>Loading...</p>
+          )}
+          <form onSubmit={formik.handleSubmit}>
+            <br />
+            <textarea
+              className={
+                formik.touched.answer && formik.errors.answer ? css.errorInput : css.input
+              }
+              // onChange={answerHandler}
+              // value={answerValue}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.answer}
+              name="answer"
+              id="answer"
+              cols="30"
+              rows="10"
+              placeholder="Your answer..."
+            ></textarea>
+            <br />
+            <p className={css.errorMsg}>{formik.errors.answer}</p>
 
-          <br />
-          <button type="submit">Submit</button>
-        </form>
+            <br />
+            <div className={css.buttonCont}>
+              <button type="submit">Submit</button>
+              <Link className={css.navLink} to={`/questions/${q_id}/answer`}>
+                <button className={css.btn}>Go back</button>
+              </Link>
+            </div>
+          </form>
+        </div>
       )}
     </>
   );

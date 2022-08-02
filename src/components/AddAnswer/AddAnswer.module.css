@@ -1,6 +1,7 @@
 .errorMsg {
   margin-top: 0;
   color: tomato;
+  margin-left: 20px;
 }
 
 .errorInput {
@@ -21,4 +22,15 @@
 .grid{
   display: flex;
   
+}
+.quesContainer{
+  text-align: center;
+  margin-bottom: 40px;
+}
+.buttonCont{
+  display: flex;
+  justify-content: space-between;
+}
+form {
+/* margin-left: 30px; */
 }
