@@ -5,6 +5,7 @@ import { baseUrl } from '../../helper/utils';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import css from './Answers.module.css';
 
 function AnswersCard({ q_id, onClick, answer }) {
   const { isUserLoggedIn, logout } = useAuthCtx();
