@@ -77,6 +77,7 @@ function MyQuestionsCardList() {
       },
     });
     const data = await response.json();
+    console.log('data', data);
     if (data.succes) {
       setPostCreated(true);
     }
@@ -88,7 +89,7 @@ function MyQuestionsCardList() {
   //
 
   return (
-    <>
+    <div className={css.mainContainer}>
       {postCreated ? (
         <>
           <div className={css.successMessage}>
@@ -103,10 +104,7 @@ function MyQuestionsCardList() {
         </>
       ) : (
         <div>
-          <h2>
-            All your questions below
-            <p>({question.length})</p>
-          </h2>
+          <h2 className={css.headerQ}>All your questions ({question.length})</h2>
           {question.length > 0 ? (
             question.map((qOb) => (
               <MyQuestionsCard
@@ -121,7 +119,7 @@ function MyQuestionsCardList() {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

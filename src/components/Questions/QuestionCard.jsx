@@ -16,10 +16,7 @@ function QuestionCard({
   q_timestamp,
   answersNr,
 }) {
-  const { isUserLoggedIn, logout } = useAuthCtx();
-
-  const [like, setLike] = useState([true]);
-  const [dislike, setDislike] = useState([true]);
+  const { isUserLoggedIn } = useAuthCtx();
 
   return (
     <>

@@ -6,9 +6,11 @@ import AnswersCard from './AnswersCard';
 import css from './Answers.module.css';
 
 function AnswersCardList() {
-  const { isUserLoggedIn, logout } = useAuthCtx();
+  const { isUserLoggedIn, token } = useAuthCtx();
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState([]);
+  const [like, setLike] = useState([true]);
+  const [dislike, setDislike] = useState([true]);
 
   const { q_id } = useParams();
   console.log('q_id from params', q_id);
@@ -28,6 +30,41 @@ function AnswersCardList() {
       setAnswers(data);
     }
   };
+
+  async function addLike(x, a_id) {
+    const response = await fetch(`${baseUrl}/answers/addLike/${a_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    console.log('data', data);
+    if (Array.isArray(data)) {
+      setQuestion(data);
+    }
+    getAllAnswers();
+    setDislike(true);
+    setLike(false);
+  }
+  async function minusLike(x, a_id) {
+    const response = await fetch(`${baseUrl}/answers/minusLike/${a_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    console.log('data', data);
+    if (Array.isArray(data)) {
+      setQuestion(data);
+    }
+    getAllAnswers();
+    setDislike(false);
+    setLike(true);
+  }
 
   useEffect(() => {
     getQuestion();
@@ -79,7 +116,14 @@ function AnswersCardList() {
             )}
           </div>
         ) : (
-          answers.map((ob) => <AnswersCard key={ob.a_id} {...ob} />)
+          answers.map((ob) => (
+            <AnswersCard
+              key={ob.a_id}
+              minusLike={() => minusLike(ob.a_likes, ob.a_id)}
+              addLike={() => addLike(ob.a_likes, ob.a_id)}
+              {...ob}
+            />
+          ))
         )}
       </div>
     </div>

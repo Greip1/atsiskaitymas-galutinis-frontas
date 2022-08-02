@@ -85,7 +85,7 @@ function MyAnswersCardList() {
 
   //
   return (
-    <>
+    <div className={css.mainContainer}>
       {postCreated ? (
         <>
           <div className={css.successMessage}>
@@ -100,10 +100,7 @@ function MyAnswersCardList() {
         </>
       ) : (
         <div>
-          <h2>
-            All your Answers below
-            <p>({answers.length})</p>
-          </h2>
+          <h2 className={css.header}>All your Answers ({answers.length})</h2>
           {answers.length > 0 ? (
             answers.map((q) => (
               <MyAnswersCard
@@ -118,7 +115,7 @@ function MyAnswersCardList() {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

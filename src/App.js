@@ -46,16 +46,10 @@ function App() {
           <AddQuestionPage />
         </ProtectedRoute>
 
-        {/* <ProtectedRoute path={'/personal/questions/:user_id/:q_id'}>
-          <EditQuestionPage />
-        </ProtectedRoute> */}
         <ProtectedRoute path={'/personal/questions/:user_id'}>
           <MyQuestionsPage />
         </ProtectedRoute>
 
-        {/* <ProtectedRoute path={'/personal/answers/:user_id/:a_id'}>
-          <EditAnswerPage />
-        </ProtectedRoute> */}
         <ProtectedRoute path={'/personal/answers/:user_id'}>
           <MyAnswersPage />
         </ProtectedRoute>
@@ -68,6 +62,7 @@ function App() {
           <NotLoggedPage />
         </Route>
       </Switch>
+      {/* <Footer /> */}
     </div>
   );
 }

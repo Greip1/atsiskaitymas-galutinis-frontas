@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useAuthCtx } from '../../store/authContext';
 import css from './Header.module.css';
 
@@ -8,8 +8,12 @@ function Header() {
   return (
     <header className={css.header}>
       <div className={css.img}>
-        <img className={css.logo} src="/logo.png" alt="Logo" />
-        <h3 className={css.text}>PETS TALK</h3>
+        <Link className="link" to="/main">
+          <img className={css.logo} src="/logo.png" alt="Logo" />
+        </Link>
+        <Link className="link" to="/main">
+          <h3 className={css.text}>PETS TALK</h3>
+        </Link>
       </div>
 
       <nav className={css.nav}>

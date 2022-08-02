@@ -1,19 +1,21 @@
 .container{
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 1000px;
     padding: 10px 30px;
     text-align: center;
 }
 .persContainer{
-    background-color: rgba(255, 255, 255, 0.932);
-    max-width: 1000px;
+    background-color: rgba(255, 255, 255, 0.806);
+    max-width: 600px;
     border-radius: 10px;
         padding: 10px 30px;
         min-height: 500px;
+        margin: 0 auto;
+
 
 }
 .personal{
-    max-width: 400px;
+    max-width: 350px;
     margin: 0 auto;
 
     display: flex;
@@ -22,4 +24,30 @@
 
 .othersContainer{
     text-align: left;
+}
+.my:hover {
+color: rgb(71, 215, 71);
+}
+.icons{
+    
+}
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 60px;
+}
+.flex{
+    display: flex;
+align-items: center;
+}
+h1{
+    margin-bottom: 60px;
+}
+span{
+    font-style: italic;
+    text-decoration: none;
+}
+.hover:hover, .icons i:hover{
+    color: rgb(71, 215, 71);
+
 }

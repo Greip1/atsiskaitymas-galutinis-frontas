@@ -12,6 +12,7 @@
   }
   
   .successMessage {
+    text-align: center;
     background-color: rgba(255, 255, 255, 0.994);
     border-radius: 10px;
     box-shadow: 2px 6px 18px lightgray;
@@ -23,13 +24,7 @@
   }
 
 
-.questionTitle{
-    /* margin-top: 200px; */
-}
-form {
-    padding-top: 20px;
-padding-left: 40px;
-}
+
 
 .buttonCont{
   display: flex;

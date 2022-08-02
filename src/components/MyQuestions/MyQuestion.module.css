@@ -1,25 +1,65 @@
 .errorMsg {
-    margin-top: 0;
-    color: tomato;
-  }
-  
-  .errorInput {
-    border-color: tomato;
-    background-color: rgb(255, 208, 199);
-  }
-  
-  .successMessage {
-    background-color: rgba(255, 255, 255, 0.994);
-    border-radius: 10px;
-    box-shadow: 2px 6px 18px lightgray;
-    left: 50%;
-    padding: 20px;
-    position: absolute;
-    top: 30%;
-    transform: translate(-50%, -50%);
-  }
+  margin-top: 0;
+  color: tomato;
+}
 
- .editedContainer{
+.errorInput {
+  border-color: tomato;
+  background-color: rgb(255, 208, 199);
+}
+
+.successMessage {
+  text-align: center;
+
+  background-color: rgba(255, 255, 255, 0.994);
+  border-radius: 10px;
+  box-shadow: 2px 6px 18px lightgray;
+  left: 50%;
+  padding: 20px;
+  position: absolute;
+  top: 30%;
+  transform: translate(-50%, -50%);
+}
+.editedContainer{
   display: flex;
   align-items: center;
  }
+
+ .mainContainer{
+    max-width: 1200px;
+  margin: 60px auto;
+ }
+ .header{
+  margin-bottom: 40px;
+ }
+ .card {
+  color: #d8a82e;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 15px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  margin: 10px 2px;
+  padding: 20px ;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+ }
+ .inputEdit{
+  border: #e6b53a 2px solid;
+  color: #6b5c32;
+  padding: 10px;
+  font-size: 15px;
+ }
+.textCont p {
+color: #cf8621;
+}
+.titleQ{
+  font-size: 20px;
+}
+.data{
+  padding-top: 10px;
+}
+.headerQ{
+  margin-bottom: 30px;
+  padding-left: 15px;
+}

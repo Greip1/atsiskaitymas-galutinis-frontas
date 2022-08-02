@@ -14,7 +14,6 @@ function QuestionCardList() {
   const [question, setQuestion] = useState([]);
   const [answers, setAnswers] = useState([]);
 
-  const [sortAnswer, setSortAnswer] = useState([]);
   const [sortDate, setSortDate] = useState([]);
   const [sortLikes, setSortLikes] = useState([]);
 

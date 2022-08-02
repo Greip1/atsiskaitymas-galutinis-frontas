@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import css from './Answers.module.css';
 
-function AnswersCard({ a_timestamp, answer, isEditedA }) {
+function AnswersCard({ a_timestamp, answer, isEditedA, addLike, minusLike, a_likes }) {
   const { isUserLoggedIn, logout } = useAuthCtx();
   const [answers, setAnswers] = useState([]);
   // =======
@@ -18,12 +18,12 @@ function AnswersCard({ a_timestamp, answer, isEditedA }) {
         {isUserLoggedIn && (
           <>
             <div className="icons">
-              <i className="fa fa-thumbs-up" aria-hidden="true"></i>
-              <i className="fa fa-thumbs-down" aria-hidden="true"></i>
+              <i onClick={addLike} className="fa fa-thumbs-up" aria-hidden="true"></i>
+              <i onClick={minusLike} className="fa fa-thumbs-down" aria-hidden="true"></i>
             </div>
           </>
         )}
-        <p>votes</p>
+        <p>votes: {a_likes}</p>
       </div>
 
       <div className={css.answerContainer}>
