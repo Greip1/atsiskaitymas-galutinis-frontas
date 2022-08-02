@@ -1,16 +1,32 @@
 .nav {
   display: flex;
   justify-content: flex-end;
-  background-color: rgb(255, 255, 255);
-
+  align-items: center;
+  
+  
 }
 .header{
-padding: 10px 10px;
-  height: 50px;
+  /* margin-top: 10px; */
+padding-left: 20px;
+  background-color: rgb(255, 255, 255);
+  height: 85px;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+
 }
-.logo
-{
-  height: 51px;
-  float: left;
+.logo{
+  height: 80px;
+  margin-top: 5px;
+}
+.img{
+  display: flex;
+  align-items: center;
+}
+.text{
+margin-left: 20px;
+font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+color: #f1a72f;
+letter-spacing: 1px;
+font-style: italic;
 }

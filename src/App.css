@@ -1,0 +1,113 @@
+* {
+    box-sizing: border-box;
+    margin: 0 auto;
+
+  }
+  :root {
+    --main-color: #f1ba2f;
+  }
+  
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva,
+      Verdana, sans-serif;
+      background: linear-gradient(135deg, #b3f39bb9, #f3af67ad);
+  
+      color: #de7402;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  .nav-link {
+    font-weight: bold;
+    letter-spacing: 1px;
+      display: inline-block;
+      padding: 0.6em 1.1em;
+      background-color: rgb(255, 255, 255);
+      color: var(--main-color);
+    }
+    .nav-link.active {
+      background-color: var(--main-color);
+      color: snow;
+      text-decoration: underline;
+      padding: 0.6em 1.1em;
+
+    } 
+    button{
+      background-color: var(--main-color);
+      color: white;
+      margin-bottom: 15px;
+      margin-top: 10px;
+      border: navajowhite;
+      padding: 10px 30px;
+      border-radius: 5px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    button:hover {
+      transform: translatey(3px);
+      background-color:orange;
+  
+    }
+    input, textarea {
+      margin: 20px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      width: 80%;
+    }
+    label{
+      margin: 20px;
+      padding: 8px 16px;
+      letter-spacing: 1px;
+  font-weight: bold;
+    }
+    input::placeholder{
+      font-weight: bold;
+      color: rgb(214, 208, 208);
+    }
+  
+    .formContainer{
+      background-color: rgba(255, 255, 255, 0.63);
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+  .formContainer button {
+  margin: 15px auto;
+  margin-left: 20px;
+  }
+    .postContainer{
+      background-color: rgba(255, 255, 255, 0.63);
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .center {
+      margin-top: 50px;
+      text-align: center;
+    }
+    h1 {
+      text-align: center;
+    }
+  
+    /* @media screen and (min-width: 1450px) {
+  
+  .App {
+    width: 1200px;
+  margin: 0 auto;
+  height: 100vh;
+
+}
+    }
+    .fa{
+      padding: 10px;
+    } */

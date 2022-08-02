@@ -3,7 +3,11 @@ import NotLoggedPage from '../../pages/NotLoggedPage/NotLoggedPage';
 import { useAuthCtx } from '../../store/authContext';
 
 function ProtectedRoute(props) {
-  const { isUserLoggedIn } = useAuthCtx();
+  const { isUserLoggedIn, token } = useAuthCtx();
+  if (!token) {
+    alert('Please login');
+    window.location.replace('/login');
+  }
   const { children, ...rest } = props;
   return <Route {...rest}>{isUserLoggedIn ? children : <NotLoggedPage />}</Route>;
 }
