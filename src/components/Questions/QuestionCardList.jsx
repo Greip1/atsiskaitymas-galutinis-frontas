@@ -13,19 +13,13 @@ function QuestionCardList() {
   const { token } = useAuthCtx();
   const [question, setQuestion] = useState([]);
   const [answers, setAnswers] = useState([]);
-  const [answersFilter, setAnswersFilter] = useState([question]);
 
   const [sortAnswer, setSortAnswer] = useState([]);
-  const [sortLikes, setSortLikes] = useState([]);
   const [sortDate, setSortDate] = useState([]);
+  const [sortLikes, setSortLikes] = useState([]);
 
-  // const getAllAnswers = async () => {
-  //   const response = await fetch(`${baseUrl}/questions/${q_id}/answers`);
-  //   const data = await response.json();
-  //   if (Array.isArray(data)) {
-  //     setAnswers(data);
-  //   }
-  // };
+  const [like, setLike] = useState([true]);
+  const [dislike, setDislike] = useState([true]);
 
   const getAllAnswers = async () => {
     const response = await fetch(`${baseUrl}/answersAll`);
@@ -49,14 +43,39 @@ function QuestionCardList() {
     getAllQuestions();
     getAllAnswers();
   }, []);
-  function addLike(x) {
-    console.log('like');
-    return x + 1;
+  async function addLike(x, q_id) {
+    const response = await fetch(`${baseUrl}/questions/addLike/${q_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    console.log('data', data);
+    if (Array.isArray(data)) {
+      setQuestion(data);
+    }
+    getAllQuestions();
+    setDislike(true);
+    setLike(false);
   }
-  function minusLike(x) {
-    console.log('dislike');
-    const ats = x - 1;
-    return ats;
+  async function minusLike(x, q_id) {
+    const response = await fetch(`${baseUrl}/questions/minusLike/${q_id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    console.log('data', data);
+    if (Array.isArray(data)) {
+      setQuestion(data);
+    }
+    getAllQuestions();
+    setDislike(false);
+    setLike(true);
   }
   //
   function sortByDate() {
@@ -133,8 +152,8 @@ function QuestionCardList() {
           question.map((skObj) => (
             <QuestionCard
               key={skObj.q_id}
-              minusLike={() => minusLike(skObj.q_likes)}
-              addLike={() => addLike(skObj.q_likes)}
+              minusLike={() => minusLike(skObj.q_likes, skObj.q_id)}
+              addLike={() => addLike(skObj.q_likes, skObj.q_id)}
               answersNr={getAnswerNo(skObj.q_id)}
               {...skObj}
             />

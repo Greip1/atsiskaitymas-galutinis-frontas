@@ -10,8 +10,7 @@ function QuestionCard({
   q_title,
   q_id,
   question,
-  onClick,
-  q_dislikes,
+
   q_likes,
   addLike,
   minusLike,
@@ -19,32 +18,12 @@ function QuestionCard({
   answersNr,
 }) {
   const { isUserLoggedIn, logout } = useAuthCtx();
-  // const [like, setLike] = useState([answers]);
-  // =======
 
-  // const getAllLikes = async () => {
-  //   const response = await fetch(`${baseUrl}/questions/${q_id}/answers`);
-  //   const data = await response.json();
-  //   if (Array.isArray(data)) {
-  //     setAnswers(data);
-  //   }
-  // };
+  const [like, setLike] = useState([true]);
+  const [dislike, setDislike] = useState([true]);
 
-  const dataNormal = new Date({ q_timestamp }).toLocaleString();
-  //
-  // SORTINGGGGGGG
-
-  // useEffect(() => {
-  // }, []);
-  // =======
-  // console.log('answers', answers);
   return (
     <>
-      {/* q.isEdited && 
-            <>
-              <p>Edited</p>
-              <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </> */}
       <div className={css.card}>
         <div className={css.likesContainer}>
           {isUserLoggedIn && (

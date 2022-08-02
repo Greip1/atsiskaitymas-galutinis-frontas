@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    margin: 0 auto;
+
   }
   :root {
     --main-color: #f1ba2f;
@@ -97,12 +99,15 @@
       text-align: center;
     }
   
-    @media screen and (min-width: 1450px) {
+    /* @media screen and (min-width: 1450px) {
   
   .App {
     width: 1200px;
-  margin: 0 auto;}
+  margin: 0 auto;
+  height: 100vh;
+
+}
     }
     .fa{
       padding: 10px;
-    }
+    } */

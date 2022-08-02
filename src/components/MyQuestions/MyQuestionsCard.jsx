@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import css from './MyQuestion.module.css';
 
-function MyQuestionsCard({ q_title, question, q_id, onEdit, onDelete }) {
+function MyQuestionsCard({ q_title, question, q_id, onEdit, onDelete, isEdited }) {
   const [isEditOn, setIsEditOn] = useState(false);
   const [editedText, setEditedText] = useState(question);
 
@@ -26,6 +27,15 @@ function MyQuestionsCard({ q_title, question, q_id, onEdit, onDelete }) {
           onChange={(event) => setEditedText(event.target.value)}
           value={editedText}
         />
+      )}
+
+      {isEdited ? (
+        <div className={css.editedContainer}>
+          <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+          <p> edited</p>
+        </div>
+      ) : (
+        ''
       )}
 
       <button onClick={questionEdit}>Edit</button>

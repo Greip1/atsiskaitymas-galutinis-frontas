@@ -14,6 +14,7 @@ const initValues = {
 };
 function RegisterForm() {
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [regFail, setRegFail] = useState(false);
 
   const formik = useFormik({
     initialValues: initValues,
@@ -41,7 +42,8 @@ function RegisterForm() {
         setRegistrationSuccess(true);
       }
       if (fetchResult.changes === 0) {
-        alert('Email already exists, login or use new email');
+        setRegFail(true);
+        // alert('Email already exists, login or use new email');
       }
     },
   });
@@ -56,83 +58,97 @@ function RegisterForm() {
           </Link>
         </div>
       ) : (
-        <div className="formContainer">
-          <h1>Welcome</h1>
+        <>
+          {regFail && (
+            <div className={css.successMessage}>
+              <p>Email already exists, please login!</p>
+              {/* <Link className={css.navLink} to={`/register`}>
+                <button className={css.btn}>Try again?</button>
+              </Link> */}
+              <Link className={css.navLink} to={`/login`}>
+                <button className={css.btn}>Login</button>
+              </Link>
+            </div>
+          )}
 
-          <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="username">Your username</label>
-            <br />
-            <input
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.username}
-              className={
-                formik.touched.username && formik.errors.username ? css.errorInput : ''
-              }
-              name="username"
-              type="text"
-              placeholder="Username"
-            />
-            <br />
-            {formik.touched.username && formik.errors.username && (
-              <p className={css.errorMsg}>{formik.errors.username}</p>
-            )}
-            <label htmlFor="email">Your email</label>
-            <br />
-            <input
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              className={
-                formik.touched.email && formik.errors.email ? css.errorInput : ''
-              }
-              name="email"
-              type="email"
-              placeholder="email@email.com"
-            />
-            <br />
-            {formik.touched.email && formik.errors.email && (
-              <p className={css.errorMsg}>{formik.errors.email}</p>
-            )}
-            <label htmlFor="password">Your password</label>
-            <br />
-            <input
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              className={
-                formik.touched.password && formik.errors.password ? css.errorInput : ''
-              }
-              name="password"
-              type="password"
-              placeholder="Password"
-            />
-            <br />
-            {formik.touched.password && formik.errors.password && (
-              <p className={css.errorMsg}>{formik.errors.password}</p>
-            )}
-            <label htmlFor="repPassword">Repeat your password</label>
-            <br />
-            <input
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.repPassword}
-              className={
-                formik.touched.repPassword && formik.errors.repPassword
-                  ? css.errorInput
-                  : ''
-              }
-              name="repPassword"
-              type="password"
-              placeholder="Repeat password"
-            />
-            {formik.touched.repPassword && formik.errors.repPassword && (
-              <p className={css.errorMsg}>{formik.errors.repPassword}</p>
-            )}{' '}
-            <br />
-            <button type="submit">Register</button>
-          </form>
-        </div>
+          <div className="formContainer">
+            <h1>Welcome</h1>
+
+            <form onSubmit={formik.handleSubmit}>
+              <label htmlFor="username">Your username</label>
+              <br />
+              <input
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.username}
+                className={
+                  formik.touched.username && formik.errors.username ? css.errorInput : ''
+                }
+                name="username"
+                type="text"
+                placeholder="Username"
+              />
+              <br />
+              {formik.touched.username && formik.errors.username && (
+                <p className={css.errorMsg}>{formik.errors.username}</p>
+              )}
+              <label htmlFor="email">Your email</label>
+              <br />
+              <input
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                className={
+                  formik.touched.email && formik.errors.email ? css.errorInput : ''
+                }
+                name="email"
+                type="email"
+                placeholder="email@email.com"
+              />
+              <br />
+              {formik.touched.email && formik.errors.email && (
+                <p className={css.errorMsg}>{formik.errors.email}</p>
+              )}
+              <label htmlFor="password">Your password</label>
+              <br />
+              <input
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+                className={
+                  formik.touched.password && formik.errors.password ? css.errorInput : ''
+                }
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
+              <br />
+              {formik.touched.password && formik.errors.password && (
+                <p className={css.errorMsg}>{formik.errors.password}</p>
+              )}
+              <label htmlFor="repPassword">Repeat your password</label>
+              <br />
+              <input
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.repPassword}
+                className={
+                  formik.touched.repPassword && formik.errors.repPassword
+                    ? css.errorInput
+                    : ''
+                }
+                name="repPassword"
+                type="password"
+                placeholder="Repeat password"
+              />
+              {formik.touched.repPassword && formik.errors.repPassword && (
+                <p className={css.errorMsg}>{formik.errors.repPassword}</p>
+              )}{' '}
+              <br />
+              <button type="submit">Register</button>
+            </form>
+          </div>
+        </>
       )}
     </>
   );
