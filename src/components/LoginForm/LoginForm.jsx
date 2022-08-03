@@ -11,7 +11,7 @@ const initValues = {
   password: '',
 };
 function LoginForm(props) {
-  const { login, username } = useAuthCtx();
+  const { login } = useAuthCtx();
   const [error, setError] = useState('');
 
   const formik = useFormik({
@@ -28,7 +28,7 @@ function LoginForm(props) {
     onSubmit: async (values) => {
       setError('');
       const fetchResult = await myFetch(`${baseUrl}/login`, 'POST', values);
-      console.log('fetchResult', fetchResult);
+      // console.log('fetchResult', fetchResult);
       if (fetchResult.err) {
         setError(fetchResult.err);
         return;

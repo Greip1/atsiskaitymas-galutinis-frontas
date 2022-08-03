@@ -1,13 +1,11 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuthCtx } from '../../store/authContext';
 import css from './Personal.module.css';
 import Footer from '../../components/Footer/Footer';
 
 function PersonalPage() {
-  const { token, username, user_id } = useAuthCtx();
-  console.log('token', token);
-  console.log('user_id', user_id);
+  const { username, user_id } = useAuthCtx();
 
   return (
     <div className={css.container}>
@@ -47,7 +45,7 @@ function PersonalPage() {
               <i className="fa fa-facebook-square" aria-hidden="true"></i>
               <i className="fa fa-twitter-square" aria-hidden="true"></i>
               <i className="fa fa-tumblr-square" aria-hidden="true"></i>{' '}
-              <i class="fa fa-instagram" aria-hidden="true"></i>
+              <i className="fa fa-instagram" aria-hidden="true"></i>
             </div>
           </div>
         </div>

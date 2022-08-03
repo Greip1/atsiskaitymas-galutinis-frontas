@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -18,7 +19,8 @@ function MyQuestionsCardList() {
   const [postCreated, setPostCreated] = useState(false);
 
   const { user_id } = useParams();
-  const getAllAnswers = async () => {
+
+  const getAllQ = async () => {
     const response = await fetch(`${baseUrl}/questions/user/${user_id}`);
     const data = await response.json();
     if (Array.isArray(data)) {
@@ -26,27 +28,20 @@ function MyQuestionsCardList() {
     }
   };
   useEffect(() => {
-    getAllAnswers();
+    getAllQ();
   }, []);
 
   async function handleUpdate(q_id, updatedQuestion) {
-    // console.log('handleUpdateTodo called in TodoApp', q_id, updatedQuestion);
-
     const upd = question.map((tObj) => {
       if (tObj.q_id === q_id) {
-        console.log('updatedQuestion', updatedQuestion);
-
         return { ...tObj, question: updatedQuestion };
       }
       return { ...tObj };
     });
-    // console.log('updatedQuestion', updatedQuestion);
     setQuestion(upd);
     const newOBj = {
       question: updatedQuestion,
     };
-    console.log('upd', upd);
-    console.log('newOBj', newOBj);
     fetchEditedQ(q_id, newOBj);
   }
   //
@@ -59,9 +54,7 @@ function MyQuestionsCardList() {
       },
       body: JSON.stringify(updatedQuestion),
     });
-    console.log('response', response);
     const data = await response.json();
-    console.log('data', data);
     if (Array.isArray(data)) {
       setQuestion(data);
     }
@@ -77,7 +70,6 @@ function MyQuestionsCardList() {
       },
     });
     const data = await response.json();
-    console.log('data', data);
     if (data.succes) {
       setPostCreated(true);
     }
@@ -105,6 +97,8 @@ function MyQuestionsCardList() {
       ) : (
         <div>
           <h2 className={css.headerQ}>All your questions ({question.length})</h2>
+          <p className={`${css.errorMsg} ${css.emailErr}`}>{error ? error : ''}</p>
+
           {question.length > 0 ? (
             question.map((qOb) => (
               <MyQuestionsCard

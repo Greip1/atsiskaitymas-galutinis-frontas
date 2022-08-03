@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
 import { useAuthCtx } from '../../store/authContext';
 import { useFormik } from 'formik';
@@ -13,9 +13,7 @@ const initValues = {
 };
 
 function AddQuestion() {
-  const history = useHistory();
-
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   const [postCreated, setPostCreated] = useState(false);
   const { user_id, token } = useAuthCtx();
 
@@ -49,11 +47,10 @@ function AddQuestion() {
       if (result.succes) {
         setPostCreated(true);
       }
-      setError(result.err);
+      // setError(result.err);
     },
   });
 
-  // ///////////////////
   return (
     <>
       {postCreated ? (

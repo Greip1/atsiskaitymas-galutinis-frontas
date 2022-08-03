@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
@@ -12,8 +14,6 @@ const initValues = {
 };
 
 function AddAnswer() {
-  const history = useHistory();
-
   const [error, setError] = useState(false);
   const [postCreated, setPostCreated] = useState(false);
   const [question, setQuestion] = useState([]);

@@ -1,9 +1,6 @@
 import css from './QuestionCard.module.css';
 import React from 'react';
 import { useAuthCtx } from '../../store/authContext';
-import { baseUrl } from '../../helper/utils';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function QuestionCard({
@@ -15,6 +12,7 @@ function QuestionCard({
   minusLike,
   q_timestamp,
   answersNr,
+  isEdited,
 }) {
   const { isUserLoggedIn } = useAuthCtx();
 
@@ -24,8 +22,16 @@ function QuestionCard({
         <div className={css.likesContainer}>
           {isUserLoggedIn && (
             <div className={css.iconContainer}>
-              <i onClick={addLike} className="fa fa-thumbs-up" aria-hidden="true"></i>
-              <i onClick={minusLike} className="fa fa-thumbs-down" aria-hidden="true"></i>
+              <i
+                onClick={addLike}
+                className="fa fa-thumbs-up like"
+                aria-hidden="true"
+              ></i>
+              <i
+                onClick={minusLike}
+                className="fa fa-thumbs-down dislike"
+                aria-hidden="true"
+              ></i>
             </div>
           )}{' '}
           <p>votes: {q_likes}</p>
@@ -40,6 +46,8 @@ function QuestionCard({
           <p className={css.description}>{question}</p>
         </div>
         <div className={css.dataContainer}>
+          <p className={css.edited}>{isEdited ? 'created' : 'edited'}</p>
+
           <p>{new Date(q_timestamp).toLocaleString()}</p>
         </div>
       </div>

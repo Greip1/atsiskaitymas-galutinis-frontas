@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { baseUrl } from '../../helper/utils';
@@ -9,13 +10,8 @@ function AnswersCardList() {
   const { isUserLoggedIn, token } = useAuthCtx();
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState([]);
-  const [like, setLike] = useState([true]);
-  const [dislike, setDislike] = useState([true]);
 
   const { q_id } = useParams();
-  console.log('q_id from params', q_id);
-  console.log(useParams());
-
   const getQuestion = async () => {
     const response = await fetch(`${baseUrl}/questions/${q_id}`);
     const data = await response.json();
@@ -40,13 +36,10 @@ function AnswersCardList() {
       },
     });
     const data = await response.json();
-    console.log('data', data);
     if (Array.isArray(data)) {
       setQuestion(data);
     }
     getAllAnswers();
-    setDislike(true);
-    setLike(false);
   }
   async function minusLike(x, a_id) {
     const response = await fetch(`${baseUrl}/answers/minusLike/${a_id}`, {
@@ -57,13 +50,10 @@ function AnswersCardList() {
       },
     });
     const data = await response.json();
-    console.log('data', data);
     if (Array.isArray(data)) {
       setQuestion(data);
     }
     getAllAnswers();
-    setDislike(false);
-    setLike(true);
   }
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import css from './MyQuestion.module.css';
 
 function MyQuestionsCard({
@@ -9,7 +10,6 @@ function MyQuestionsCard({
   onDelete,
   isEdited,
   q_timestamp,
-  isEditedQ,
 }) {
   const [isEditOn, setIsEditOn] = useState(false);
   const [editedText, setEditedText] = useState(question);
@@ -29,7 +29,9 @@ function MyQuestionsCard({
   return (
     <div className={css.card}>
       <div className={css.textCont}>
-        <h2 className={css.titleQ}>{q_title}</h2>
+        <Link to={`/questions/${q_id}/answer`}>
+          <h2 className={css.titleQ}>{q_title}</h2>
+        </Link>
         {!isEditOn && <p>{question}</p>}
         {isEditOn && (
           <input

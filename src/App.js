@@ -2,7 +2,6 @@ import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 import NotLoggedPage from './pages/NotLoggedPage/NotLoggedPage';
 import MainPage from './pages/MainPage/MainPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
@@ -62,7 +61,6 @@ function App() {
           <NotLoggedPage />
         </Route>
       </Switch>
-      {/* <Footer /> */}
     </div>
   );
 }

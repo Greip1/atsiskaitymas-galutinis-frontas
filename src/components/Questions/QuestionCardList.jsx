@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import css from './QuestionCard.module.css';
 
@@ -51,7 +52,6 @@ function QuestionCardList() {
       },
     });
     const data = await response.json();
-    console.log('data', data);
     if (Array.isArray(data)) {
       setQuestion(data);
     }
@@ -68,7 +68,6 @@ function QuestionCardList() {
       },
     });
     const data = await response.json();
-    console.log('data', data);
     if (Array.isArray(data)) {
       setQuestion(data);
     }
@@ -94,16 +93,6 @@ function QuestionCardList() {
       : arrCopy.sort((a, b) => b.q_likes - a.q_likes);
     setQuestion(arrCopy);
   }
-  function sortByAnswers() {
-    // setSortAnswer((prev) => !prev);
-    // console.log('sortDate', sortDate);
-    // const arrCopy = [...question];
-    // sortDate
-    //   ? arrCopy.sort((a, b) => a.q_timestamp - b.q_timestamp)
-    //   : arrCopy.sort((a, b) => b.q_timestamp - a.q_timestamp);
-    // console.log('click arrCopy', arrCopy);
-    // setSortAnswer(arrCopy);
-  }
 
   function showAnswered() {
     const arrCopyQ = [...question];
@@ -114,7 +103,6 @@ function QuestionCardList() {
     const rightId = arrQidQ.filter((x) => arrQidA.includes(x));
     const atsqqq = arrCopyQ.filter((ob) => rightId.includes(ob.q_id));
     setQuestion(atsqqq);
-    console.log('setQuestion', setQuestion);
   }
   function showNOTAnswered() {
     const arrCopyQ = [...question];
@@ -125,7 +113,6 @@ function QuestionCardList() {
     const rightId = arrQidQ.filter((x) => arrQidA.includes(x));
     const atsqqq = arrCopyQ.filter((ob) => !rightId.includes(ob.q_id));
     setQuestion(atsqqq);
-    console.log('setQuestion', setQuestion);
   }
   return (
     <div className={css.container}>

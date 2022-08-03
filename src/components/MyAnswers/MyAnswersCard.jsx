@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
-import { useAuthCtx } from '../../store/authContext';
 import css from './MyAnswers.module.css';
 
-function MyAnswersCard({ a_id, answer, onDelete, onEdit, isEditedA, a_timestamp }) {
-  const { token } = useAuthCtx();
+function MyAnswersCard({
+  questionPr,
+  questionTitlePr,
+  q_id,
+  a_id,
+  answer,
+  onDelete,
+  onEdit,
+  isEditedA,
+  a_timestamp,
+}) {
   const [isEditOn, setIsEditOn] = useState(false);
   const [editedText, setEditedText] = useState(answer);
 
-  if (!token) {
-    alert('Session time is over.Please login');
-    window.location.replace('/login');
-  }
   function answerEdit() {
     if (isEditOn === false) {
       setIsEditOn(true);
@@ -21,9 +25,12 @@ function MyAnswersCard({ a_id, answer, onDelete, onEdit, isEditedA, a_timestamp 
       onEdit(a_id, editedText);
     }
   }
+
   return (
     <div className={css.card}>
       <div className={css.textCont}>
+        <h3>{questionPr}</h3>
+        <p>{questionTitlePr}</p>
         {!isEditOn && <p>{answer}</p>}
         {isEditOn && (
           <input

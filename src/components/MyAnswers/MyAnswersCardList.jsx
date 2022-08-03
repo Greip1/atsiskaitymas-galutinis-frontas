@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-restricted-globals */
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -11,6 +12,7 @@ function MyAnswersCardList() {
   const { user_id } = useParams();
   const { token } = useAuthCtx();
 
+  // const [questions, setQuestions] = useState([]);
   const [error, setError] = useState(false);
   const [postCreated, setPostCreated] = useState(false);
 
@@ -41,32 +43,23 @@ function MyAnswersCardList() {
       setAnswers(data);
     }
   }
-  useEffect(() => {
-    getAllAnswers();
-  }, []);
+
   //
   async function handleUpdate(a_id, updatedAnswer) {
-    // console.log('handleUpdateTodo called in TodoApp', a_id, updatedAnswer);
-
     const upd = answers.map((tObj) => {
       if (tObj.a_id === a_id) {
-        console.log('updatedAnswer', updatedAnswer);
-
         return { ...tObj, answer: updatedAnswer };
       }
       return { ...tObj };
     });
-    // console.log('updatedAnswer', updatedAnswer);
     setAnswers(upd);
     const newOBj = {
       answer: updatedAnswer,
     };
-    console.log('upd', upd);
-    console.log('newOBj', newOBj);
-    fetchEditedQ(a_id, newOBj);
+    fetchEditedA(a_id, newOBj);
   }
   //
-  async function fetchEditedQ(a_id, updatedAnswer) {
+  async function fetchEditedA(a_id, updatedAnswer) {
     const response = await fetch(`${baseUrl}/answers/${a_id}`, {
       method: 'PATCH',
       headers: {
@@ -75,13 +68,15 @@ function MyAnswersCardList() {
       },
       body: JSON.stringify(updatedAnswer),
     });
-    console.log('response', response);
     const data = await response.json();
-    console.log('data', data);
     if (Array.isArray(data)) {
       setAnswers(data);
     }
   }
+
+  useEffect(() => {
+    getAllAnswers();
+  }, []);
 
   //
   return (
@@ -101,6 +96,8 @@ function MyAnswersCardList() {
       ) : (
         <div>
           <h2 className={css.header}>All your Answers ({answers.length})</h2>
+          <p className={`${css.errorMsg} ${css.emailErr}`}>{error ? error : ''}</p>
+
           {answers.length > 0 ? (
             answers.map((q) => (
               <MyAnswersCard
