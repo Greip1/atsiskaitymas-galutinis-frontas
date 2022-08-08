@@ -1,0 +1,30 @@
+.mainCont{
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 10px;
+
+}
+.mainCont h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-style: italic;
+    font-size: 20px;
+}
+.mainCont h1 {
+margin-bottom: 30px;
+}
+.cont{
+    margin: 30px 50px;
+}
+.askQuestion{
+    margin-bottom: 10px;
+}
+span{
+    text-decoration: underline 2px solid orange;
+}
+span:hover{
+    color: rgb(53, 215, 56);
+    text-decoration: underline 2px solid rgb(53, 215, 56);
+
+}
+
